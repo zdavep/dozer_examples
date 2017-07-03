@@ -1,4 +1,4 @@
-// Copyright 2016 Dave Pederson.  All rights reserved.
+// Copyright 2017 Dave Pederson.  All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 package main
@@ -10,7 +10,7 @@ import (
 	"os/signal"
 )
 
-// Consume messages from a test queue and forward them to a ZeroMQ socket.
+// Consume messages from a test queue and forward them to a "mangos" socket.
 func main() {
 
 	// Create a dozer queue instance
@@ -21,7 +21,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Create a dozer ZeroMQ socket instance
+	// Create a dozer "mangos" socket instance
 	socket := dozer.Socket("send").WithProtocol("mangos")
 	err = socket.Bind("*", 5555) // Bind to all interfaces
 	if err != nil {

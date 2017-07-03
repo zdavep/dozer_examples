@@ -5,3 +5,5 @@ mangos/recv/recv
 mangos/send/send
 stomp/recv/recv
 stomp/send/send
+kafka/producer/producer
+kafka/consumer/consumer

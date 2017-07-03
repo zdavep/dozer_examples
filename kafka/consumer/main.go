@@ -18,23 +18,22 @@ func messageHandler(id int, messages chan []byte) {
 	}
 }
 
-// Consume messages from a Mangos socket.
+// Consume messages from a Kafka topic.
 func main() {
 
-	// Create a dozer Mangos socket instance
-	dz := dozer.Socket("recv").WithProtocol("mangos")
-	err := dz.Connect("localhost", 5555)
+	// Create a dozer Kafka consumer instance
+	dz := dozer.Topic("test").WithProtocol("kafka").Consumer()
+	err := dz.Connect("localhost", 9092)
 	if err != nil {
-		log.Println("Error creating mangos socket!")
+		log.Println("Error creating kafka consumer!")
 		log.Fatal(err)
 	}
 
 	// Helper channels
 	messages, quit := make(chan []byte), make(chan bool)
 
-	// Dedicate a majority of CPUs to message processing.
-	workers := runtime.NumCPU()/2 + 1
-	for i := 1; i <= workers; i++ {
+	// Dedicate some go-routines for message processing.
+	for i := 1; i <= runtime.NumCPU()/2+1; i++ {
 		go messageHandler(i, messages)
 	}
 
@@ -42,7 +41,7 @@ func main() {
 	log.Println("Receiving messages; hit [ctrl-c] to quit.")
 	go func() {
 		if err := dz.RecvLoop(messages, quit); err != nil {
-			log.Println(err)
+			log.Fatal(err)
 		}
 	}()
 

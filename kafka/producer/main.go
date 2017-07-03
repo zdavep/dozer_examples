@@ -40,7 +40,7 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 			quit <- true
 			return
 		default:
-			time.Sleep(time.Duration(rand.Int63n(500)) * time.Millisecond)
+			time.Sleep(time.Duration(rand.Int63n(100)) * time.Millisecond)
 			i, s := time.Now().UnixNano(), randString(1024)
 			msg := fmt.Sprintf("%d: %s", i, s)
 			log.Printf("Sending [ %s ]\n", msg)
@@ -49,12 +49,12 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 	}
 }
 
-// Send messages to a Mangos socket for 10 seconds.
+// Send messages to a Kafka topic for 10 seconds.
 func main() {
 
-	// Create a dozer Mangos socket instance
-	dz := dozer.Socket("send").WithProtocol("mangos")
-	err := dz.Bind("*", 5555) // Bind to all interfaces
+	// Create a dozer Kafka producer instance
+	dz := dozer.Topic("test").WithProtocol("kafka").Producer()
+	err := dz.Connect("localhost", 9092)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func main() {
 	// Start sending messages
 	go sendWorker(messages, timeout, quit)
 	if err := dz.SendLoop(messages, quit); err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
 
 	// Cleanup
