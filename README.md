@@ -1,2 +1,3 @@
-# dozer_examples
-A repo for dozer example code
+# Dozer Examples
+
+Dozer example code. Used primarily to test protocols.

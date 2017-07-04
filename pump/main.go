@@ -15,15 +15,15 @@ func main() {
 
 	// Create a dozer queue instance
 	var err error
-	queue := dozer.Queue("test").WithProtocol("stomp")
-	err = queue.Connect("localhost", 61613)
+	queue := dozer.Init("test").WithProtocol("stomp").Consumer()
+	err = queue.Dial("localhost", 61613)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Create a dozer "mangos" socket instance
-	socket := dozer.Socket("send").WithProtocol("mangos")
-	err = socket.Bind("*", 5555) // Bind to all interfaces
+	socket := dozer.Init("").WithProtocol("mangos").Producer()
+	err = socket.Dial("*", 5555) // Bind to all interfaces
 	if err != nil {
 		log.Fatal(err)
 	}

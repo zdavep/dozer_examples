@@ -53,8 +53,8 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 func main() {
 
 	// Create a dozer Kafka producer instance
-	dz := dozer.Topic("test").WithProtocol("kafka").Producer()
-	err := dz.Connect("localhost", 9092)
+	dz := dozer.Init("test").WithProtocol("kafka").Producer()
+	err := dz.Dial("localhost", 9092)
 	if err != nil {
 		log.Fatal(err)
 	}

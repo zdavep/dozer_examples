@@ -49,12 +49,12 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 	}
 }
 
-// Send messages to a Mangos socket for 10 seconds.
+// Send messages to a mangos socket for 10 seconds.
 func main() {
 
 	// Create a dozer Mangos socket instance
-	dz := dozer.Socket("send").WithProtocol("mangos")
-	err := dz.Bind("*", 5555) // Bind to all interfaces
+	dz := dozer.Init("").WithProtocol("mangos").Producer()
+	err := dz.Dial("*", 5555) // Bind to all interfaces
 	if err != nil {
 		log.Fatal(err)
 	}

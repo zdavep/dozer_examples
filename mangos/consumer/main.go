@@ -22,8 +22,8 @@ func messageHandler(id int, messages chan []byte) {
 func main() {
 
 	// Create a dozer Mangos socket instance
-	dz := dozer.Socket("recv").WithProtocol("mangos")
-	err := dz.Connect("localhost", 5555)
+	dz := dozer.Init("").WithProtocol("mangos").Consumer()
+	err := dz.Dial("localhost", 5555)
 	if err != nil {
 		log.Println("Error creating mangos socket!")
 		log.Fatal(err)
