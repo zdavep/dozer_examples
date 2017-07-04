@@ -50,5 +50,6 @@ func main() {
 	signal.Notify(interrupt, os.Interrupt)
 	<-interrupt
 	signal.Stop(interrupt)
+	quit <- true
 	os.Exit(0)
 }
