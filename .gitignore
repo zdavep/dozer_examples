@@ -1,9 +1,9 @@
 pump/pump
-amqp/recv/recv
-amqp/send/send
-mangos/recv/recv
-mangos/send/send
-stomp/recv/recv
-stomp/send/send
-kafka/producer/producer
+amqp/consumer/consumer
+amqp/producer/producer
+mangos/consumer/consumer
+mangos/producer/producer
+stomp/consumer/consumer
+stomp/producer/producer
 kafka/consumer/consumer
+kafka/producer/producer
