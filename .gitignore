@@ -3,6 +3,8 @@ amqp/consumer/consumer
 amqp/producer/producer
 mangos/consumer/consumer
 mangos/producer/producer
+nats/consumer/consumer
+nats/producer/producer
 stomp/consumer/consumer
 stomp/producer/producer
 kafka/consumer/consumer
