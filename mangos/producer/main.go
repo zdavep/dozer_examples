@@ -53,7 +53,7 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 func main() {
 
 	// Create a dozer Mangos socket instance
-	dz := dozer.Init("").WithProtocol("mangos").Producer()
+	dz := dozer.Init("mangos").Producer("")
 	err := dz.Dial("*", 5555) // Bind to all interfaces
 	if err != nil {
 		log.Fatal(err)

@@ -32,7 +32,7 @@ func messageHandler(id int, messages chan []byte, quit chan bool) {
 func main() {
 
 	// Create a stomp dozer instance for a queue named "test"
-	dz := dozer.Init("test").WithProtocol("amqp").WithCredentials("guest", "guest").Consumer()
+	dz := dozer.Init("amqp").Consumer("test").WithCredentials("guest", "guest")
 	err := dz.Dial("localhost", 5672)
 	if err != nil {
 		log.Fatal(err)

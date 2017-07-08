@@ -53,7 +53,7 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 func main() {
 
 	// Create a stomp dozer instance for a queue named "test"
-	dz := dozer.Init("test").WithProtocol("amqp").WithCredentials("guest", "guest").Producer()
+	dz := dozer.Init("amqp").Producer("test").WithCredentials("guest", "guest")
 	err := dz.Dial("localhost", 5672)
 	if err != nil {
 		log.Fatal(err)

@@ -11,18 +11,11 @@ import (
 	"runtime"
 )
 
-// Example message handler function.
-func messageHandler(id int, messages chan []byte) {
-	for message := range messages {
-		log.Printf("%d: Received [ %s ]\n", id, string(message))
-	}
-}
-
 // Consume messages from a Kafka topic.
 func main() {
 
 	// Create a dozer Kafka consumer instance
-	dz := dozer.Init("test").WithProtocol("nats").Consumer()
+	dz := dozer.Init("nats").Producer("test")
 	err := dz.Dial("localhost", 4222)
 	if err != nil {
 		log.Fatal(err)
@@ -33,7 +26,11 @@ func main() {
 
 	// Dedicate some go-routines for message processing.
 	for i := 1; i <= runtime.NumCPU()/2+1; i++ {
-		go messageHandler(i, messages)
+		go func(id int, msgs chan []byte) {
+			for msg := range msgs {
+				log.Printf("%d: Received [ %s ]\n", id, string(msg))
+			}
+		}(i, messages)
 	}
 
 	// Start receiving messages

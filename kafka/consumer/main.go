@@ -22,7 +22,7 @@ func messageHandler(id int, messages chan []byte) {
 func main() {
 
 	// Create a dozer Kafka consumer instance
-	dz := dozer.Init("test").WithProtocol("kafka").Consumer()
+	dz := dozer.Init("kafka").Consumer("test")
 	err := dz.Dial("localhost", 9092)
 	if err != nil {
 		log.Println("Error creating kafka consumer!")
