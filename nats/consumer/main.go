@@ -15,7 +15,7 @@ import (
 func main() {
 
 	// Create a dozer Kafka consumer instance
-	dz := dozer.Init("nats").Producer("test")
+	dz := dozer.Init("nats").Consumer("test").WithCredentials("guest", "guest")
 	err := dz.Dial("localhost", 4222)
 	if err != nil {
 		log.Fatal(err)
