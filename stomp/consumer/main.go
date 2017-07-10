@@ -5,6 +5,7 @@ package main
 
 import (
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/stomp"
 	"log"
 	"os"
 	"os/signal"
@@ -33,7 +34,7 @@ func messageHandler(id int, messages chan []byte, quit chan bool) {
 func main() {
 
 	// Create a stomp dozer instance for a queue named "test"
-	dz := dozer.Init("stomp").Consumer("stomp")
+	dz := dozer.Init("stomp").Consumer("test")
 	err := dz.Dial("localhost", 61613)
 	if err != nil {
 		log.Fatal(err)

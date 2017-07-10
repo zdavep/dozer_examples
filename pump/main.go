@@ -5,6 +5,8 @@ package main
 
 import (
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/mangos"
+	_ "github.com/zdavep/dozer/proto/stomp"
 	"log"
 	"os"
 	"os/signal"

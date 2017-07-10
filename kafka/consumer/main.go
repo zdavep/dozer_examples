@@ -5,6 +5,7 @@ package main
 
 import (
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/kafka"
 	"log"
 	"os"
 	"os/signal"

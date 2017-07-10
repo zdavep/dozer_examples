@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/kafka"
 	"log"
 	"math/rand"
 	"time"
@@ -53,7 +54,7 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 func main() {
 
 	// Create a dozer Kafka producer instance
-	dz := dozer.Init("kafka").Producer("kafka")
+	dz := dozer.Init("kafka").Producer("test")
 	err := dz.Dial("localhost", 9092)
 	if err != nil {
 		log.Fatal(err)

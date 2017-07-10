@@ -5,6 +5,7 @@ package main
 
 import (
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/nats"
 	"log"
 	"os"
 	"os/signal"

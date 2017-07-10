@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/stomp"
 	"log"
 	"math/rand"
 	"time"
@@ -53,7 +54,7 @@ func sendWorker(messages chan []byte, timeout chan bool, quit chan bool) {
 func main() {
 
 	// Create a stomp dozer instance for a queue named "test"
-	dz := dozer.Init("stomp").Producer("stomp")
+	dz := dozer.Init("stomp").Producer("test")
 	err := dz.Dial("localhost", 61613)
 	if err != nil {
 		log.Fatal(err)

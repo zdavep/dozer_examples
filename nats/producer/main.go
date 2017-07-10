@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"github.com/zdavep/dozer"
+	_ "github.com/zdavep/dozer/proto/nats"
 	"log"
 	"math/rand"
 	"time"
